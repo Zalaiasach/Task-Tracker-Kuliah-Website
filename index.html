@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuliah Task Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Task Tracker Kuliah</h1>
+      <p>Kelola jadwal tugas dan praktikum dengan teratur</p>
+    </header>
+
+    <!-- Form Input Tugas -->
+    <form id="task-form" class="card">
+      <div class="form-group">
+        <label for="task-title">Mata Kuliah / Judul Tugas</label>
+        <input type="text" id="task-title" placeholder="Contoh: Laporan Praktikum Jaringan" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="task-category">Kategori</label>
+          <select id="task-category">
+            <option value="Tugas">Tugas</option>
+            <option value="Praktikum">Praktikum</option>
+            <option value="Kuis">Kuis</option>
+            <option value="Proyek">Proyek</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="task-deadline">Tenggat Waktu</label>
+          <input type="date" id="task-deadline" required>
+        </div>
+      </div>
+
+      <button type="submit" id="btn-submit">Tambah Tugas</button>
+    </form>
+
+    <!-- Kontrol Filter & Statistik -->
+    <div class="tracker-controls card">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="pending">Belum Selesai</button>
+        <button class="filter-btn" data-filter="completed">Selesai</button>
+      </div>
+      <div class="stats">
+        <span>Total: <strong id="total-count">0</strong></span>
+        <span>Selesai: <strong id="completed-count">0</strong></span>
+      </div>
+    </div>
+
+    <!-- Kontainer Daftar Tugas -->
+    <section>
+      <ul id="task-list"></ul>
+      <p id="empty-state" class="empty-state">Belum ada tugas tercatat.</p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
