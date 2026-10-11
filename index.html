@@ -3,31 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuliah Task Tracker</title>
+  <title>Task Tracker Kuliah v2 — REST API</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Task Tracker Kuliah</h1>
-      <p>Kelola jadwal tugas dan praktikum dengan teratur</p>
+      <h1>Task Tracker Kuliah <small style="font-size: 14px; color: #6b7280;">v2 · REST API</small></h1>
+      <p>Kelola jadwal tugas dan praktikum dengan integrasi REST API</p>
     </header>
+
+    <!-- Banner Pesan Kesalahan Form / Server -->
+    <div id="form-error" class="alert-box error" style="display: none;"></div>
 
     <!-- Form Input Tugas -->
     <form id="task-form" class="card">
       <div class="form-group">
-        <label for="task-title">Mata Kuliah / Judul Tugas</label>
-        <input type="text" id="task-title" placeholder="Contoh: Laporan Praktikum Jaringan" required>
+        <label for="task-title">Judul Tugas (min. 3 karakter)</label>
+        <input type="text" id="task-title" placeholder="Contoh: Lab 10 Event Delegation" required minlength="3">
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="task-category">Kategori</label>
-          <select id="task-category">
-            <option value="Tugas">Tugas</option>
-            <option value="Praktikum">Praktikum</option>
-            <option value="Kuis">Kuis</option>
-            <option value="Proyek">Proyek</option>
+          <label for="task-category">Mata Kuliah</label>
+          <select id="task-category" required>
+            <option value="" disabled selected>Memuat mata kuliah...</option>
           </select>
         </div>
 
@@ -40,26 +40,50 @@
       <button type="submit" id="btn-submit">Tambah Tugas</button>
     </form>
 
-    <!-- Kontrol Filter & Statistik -->
+    <!-- Kontrol Filter, Pencarian, & Statistik -->
     <div class="tracker-controls card">
       <div class="filter-buttons">
         <button class="filter-btn active" data-filter="all">Semua</button>
-        <button class="filter-btn" data-filter="pending">Belum Selesai</button>
+        <button class="filter-btn" data-filter="pending">Aktif</button>
         <button class="filter-btn" data-filter="completed">Selesai</button>
       </div>
+      
+      <!-- Input Pencarian (Bonus Debounce) -->
+      <div class="search-box">
+        <input type="text" id="task-search" placeholder="Cari tugas...">
+      </div>
+
       <div class="stats">
         <span>Total: <strong id="total-count">0</strong></span>
+        <span>Aktif: <strong id="pending-count">0</strong></span>
         <span>Selesai: <strong id="completed-count">0</strong></span>
       </div>
     </div>
 
-    <!-- Kontainer Daftar Tugas -->
+    <!-- Kontainer Daftar Tugas & State -->
     <section>
+      <!-- State Error Server + Retry Button -->
+      <div id="server-error" class="alert-box error" style="display: none;">
+        <span id="server-error-msg">Gagal memuat data dari server.</span>
+        <button id="btn-retry" class="btn-action" style="margin-left: 10px; background-color: #ef4444; color: #fff;">Coba Lagi</button>
+      </div>
+
+      <!-- State Loading -->
+      <div id="loading-state" class="empty-state" style="display: none;">
+        Memuat data tugas...
+      </div>
+
+      <!-- List Tugas -->
       <ul id="task-list"></ul>
-      <p id="empty-state" class="empty-state">Belum ada tugas tercatat.</p>
+
+      <!-- State Kosong -->
+      <p id="empty-state" class="empty-state" style="display: none;">Belum ada tugas tercatat.</p>
     </section>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Mock Backend API untuk simulasi REST API, Mode Offline, dan Lambat -->
+  <script src="mock-api.js"></script>
+  <!-- Main Application Logic -->
+  <script src="app.js"></script>
 </body>
 </html>

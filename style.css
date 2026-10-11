@@ -90,6 +90,13 @@ input:focus, select:focus {
   background-color: #1d4ed8;
 }
 
+#btn-submit:disabled,
+button:disabled {
+  background-color: #9ca3af !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 .tracker-controls {
   display: flex;
   justify-content: space-between;
@@ -118,6 +125,12 @@ input:focus, select:focus {
   border-color: #2563eb;
 }
 
+.search-box input {
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 150px;
+}
+
 .stats {
   font-size: 13px;
   color: #4b5563;
@@ -141,6 +154,7 @@ input:focus, select:focus {
   justify-content: space-between;
   align-items: center;
   border-left: 5px solid #2563eb;
+  transition: opacity 0.2s ease;
 }
 
 .task-item.completed {
@@ -209,4 +223,17 @@ input:focus, select:focus {
   color: #9ca3af;
   margin-top: 20px;
   font-size: 14px;
+}
+
+.alert-box {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.alert-box.error {
+  background-color: #fee2e2;
+  border: 1px solid #f87171;
+  color: #b91c1c;
 }
